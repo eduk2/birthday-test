@@ -31,3 +31,13 @@ func (b *birthday) CkeckBirthday(year, month, day int) *people {
 
 	return &peopleBirthdayList
 }
+
+// Check if a year is a leap-year.
+// For simplicity, it was considered a leap-year is any year divisible by 4.
+func isLeapYear(year int) bool {
+	var leapYear bool = false
+	if year%4 == 0 {
+		leapYear = true
+	}
+	return leapYear
+}

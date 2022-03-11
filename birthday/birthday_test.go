@@ -127,6 +127,26 @@ func TestCkeckBirthday(t *testing.T) {
 }
 
 func TestIsLeapYear(t *testing.T) {
+	yearsListToTest := []struct {
+		searching int
+		expected  bool
+	}{
+		{2000, true},
+		{2010, false},
+		{2020, true},
+		{2021, false},
+		{2024, true},
+	}
+
+	for _, year := range yearsListToTest {
+
+		yearSearchedIsLeapYear := isLeapYear(year.searching)
+		if yearSearchedIsLeapYear != year.expected {
+			t.Errorf("With %v: %+v and it was expecting %+v", year.searching, yearSearchedIsLeapYear, year.expected)
+		}
+
+	}
+
 }
 
 func TestJsonToPeople(t *testing.T) {

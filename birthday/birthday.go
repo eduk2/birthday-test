@@ -30,6 +30,16 @@ type birthday struct {
 // returns people whose birthday is today.
 func (b *birthday) PeopleWhoseBirthdayIsToday() (peopleBirthdayTodayList *people) {
 
+	date := time.Now().Format(layoutUK)
+	fmt.Println("Today is:", date)
+	today, _ := time.Parse(layoutUK, date)
+
+	monthToday := int(today.Month())
+	dayToday := today.Day()
+	yearToday := today.Year()
+
+	peopleBirthdayTodayList = b.CkeckBirthday(yearToday, monthToday, dayToday)
+
 	return
 }
 

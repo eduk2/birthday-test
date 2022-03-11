@@ -51,7 +51,54 @@ func TestPeopleWhoseBirthdayIsToday(t *testing.T) {
 
 }
 
-func TestPeopleWhoseBirthdayIs(t *testing.T) {
+func TestCkeckBirthday(t *testing.T) {
+
+	var birthdaysSample = &birthday{
+		peopleList: people{
+			person{
+				"Smith", "George", "2001/12/24",
+			},
+			person{
+				"Lady", "Gaga", "2000/05/02",
+			},
+			person{
+				"Lee", "David", "1990/05/2",
+			},
+			person{
+				"Lopez", "Jennifer", "1970/10/29",
+			},
+			person{
+				"Muller", "David", "1995/5/2",
+			},
+			person{
+				"Leal", "Robert", "1995/02/27",
+			},
+			person{
+				"Robles", "Rosa", "1960/02/28",
+			},
+			person{
+				"Andersen", "Jack", "2000/02/29",
+			},
+		},
+	}
+
+	birthdaysExpected := &people{
+		person{
+			"Lady", "Gaga", "2000/05/02",
+		},
+		person{
+			"Lee", "David", "1990/05/2",
+		},
+		person{
+			"Muller", "David", "1995/5/2",
+		},
+	}
+
+	peopleChecked := birthdaysSample.CkeckBirthday(2021, 5, 2)
+	if !reflect.DeepEqual(peopleChecked, birthdaysExpected) {
+		t.Errorf("%+v did not equal to %+v", peopleChecked, birthdaysExpected)
+	}
+
 }
 
 func TestIsLeapYear(t *testing.T) {

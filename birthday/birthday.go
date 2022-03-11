@@ -4,10 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 )
 
-// Parse dates from json (year/month/day)
-const layoutUK string = "2006/1/2"
+const (
+	// Special day
+	feb29thMonth, feb29thDay int = 2, 29
+	// Parse dates from json (year/month/day)
+	layoutUK string = "2006/1/2"
+)
 
 type person struct {
 	LastName string `json:"lastName"`
@@ -34,6 +39,27 @@ func (b *birthday) PeopleWhoseBirthdayIsToday() (peopleBirthdayTodayList *people
 func (b *birthday) CkeckBirthday(year, month, day int) *people {
 
 	var peopleBirthdayList = people{}
+	var isCheckingALeapYear bool = isLeapYear(year)
+
+	for _, person := range b.peopleList {
+
+		birthday, err := time.Parse(layoutUK, person.Birthday)
+		check(err)
+
+		monthPerson := int(birthday.Month())
+		dayPerson := birthday.Day()
+
+		//if it is not checking a leap year and the person was born on XXXX/02/29
+		// then their birthday is a day before it: XXXX/02/28
+		if !isCheckingALeapYear && monthPerson == feb29thMonth && dayPerson == feb29thDay {
+			dayPerson--
+		}
+
+		if month == monthPerson && day == dayPerson {
+			peopleBirthdayList = append(peopleBirthdayList, person)
+		}
+
+	}
 
 	return &peopleBirthdayList
 }

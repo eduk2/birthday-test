@@ -26,6 +26,33 @@ type birthday struct {
 	peopleList people
 }
 
+/* Constructor function: It receives the full path of a json file.
+
+Example of json file:
+
+[
+    {
+        "lastName": "Doe",
+        "firstName": "John",
+        "birthday": "1982/10/08"
+    },
+    {
+        "lastName": "Wayne",
+        "firstName": "Bruce",
+        "birthday": "1965/01/30"
+    }
+]
+*/
+func NewBirthday(pathJsonFile string) *birthday {
+	var peopleList *people = jsonToPeople(pathJsonFile)
+
+	return &birthday{
+		jsonFile:   pathJsonFile,
+		peopleList: *peopleList,
+	}
+
+}
+
 // Given a JSON list of people with their dates of birth,
 // returns people whose birthday is today.
 func (b *birthday) PeopleWhoseBirthdayIsToday() (peopleBirthdayTodayList *people) {

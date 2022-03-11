@@ -41,3 +41,10 @@ func isLeapYear(year int) bool {
 	}
 	return leapYear
 }
+
+// Convert from a json file to people
+func jsonToPeople(jsonFile string) *people {
+	var peopleList people
+
+	return &peopleList
+}

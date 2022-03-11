@@ -150,4 +150,11 @@ func TestIsLeapYear(t *testing.T) {
 }
 
 func TestJsonToPeople(t *testing.T) {
+
+	peopleList := jsonToPeople("sample.json")
+
+	if len(*peopleList) == 0 {
+		t.Fatal("Sample file doesn't have any person")
+	}
+
 }

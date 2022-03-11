@@ -99,6 +99,20 @@ func TestCkeckBirthday(t *testing.T) {
 		t.Errorf("%+v did not equal to %+v", peopleChecked, birthdaysExpected)
 	}
 
+	//More cases with the critical day in not leap year
+	notLeapYearBirthdaysExpected := &people{
+		person{
+			"Robles", "Rosa", "1960/02/28",
+		},
+		person{
+			"Andersen", "Jack", "2000/02/29",
+		},
+	}
+	leapYearChecked := birthdaysSample.CkeckBirthday(2001, 2, 28)
+	if !reflect.DeepEqual(leapYearChecked, notLeapYearBirthdaysExpected) {
+		t.Errorf("%+v did not equal to %+v", leapYearChecked, notLeapYearBirthdaysExpected)
+	}
+
 }
 
 func TestIsLeapYear(t *testing.T) {

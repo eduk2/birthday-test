@@ -1,5 +1,11 @@
 package birthday
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
 // Parse dates from json (year/month/day)
 const layoutUK string = "2006/1/2"
 
@@ -44,7 +50,20 @@ func isLeapYear(year int) bool {
 
 // Convert from a json file to people
 func jsonToPeople(jsonFile string) *people {
+
 	var peopleList people
+	peopleJson, err := os.ReadFile(jsonFile)
+	check(err)
+	fmt.Println("File opened successfully:", jsonFile)
+
+	err = json.Unmarshal(peopleJson, &peopleList)
+	check(err)
 
 	return &peopleList
+}
+
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
 }
